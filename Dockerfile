@@ -7,7 +7,7 @@ RUN apk update \
   && touch ~/.bashrc \
   && curl -o- -L https://yarnpkg.com/install.sh | bash
 
-FROM node:8-alpine as yarn
+FROM node:8-alpine
 
 COPY --from=build /opt/yarn /opt
 
