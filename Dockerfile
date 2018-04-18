@@ -9,7 +9,7 @@ RUN apk update \
 
 FROM node:8-alpine
 
-COPY --from=build /opt/yarn /opt
+COPY --from=build /opt/yarn* /opt
 
 COPY --from=build /usr/local/bin/yarn /usr/local/bin/yarn
 
