@@ -11,13 +11,15 @@ RUN apk update \
 
 FROM node:8-alpine
 
-COPY --from=build /root/.yarn /root/.yarn
-
 RUN apk update \
   && apk add tzdata \
   && cp /usr/share/zoneinfo/America/New_York /etc/localtime
 
-ENV PATH="/root/.yarn/bin:${PATH}"
+USER node:node
+
+COPY --from=build /root/.yarn /home/node/.yarn
+
+ENV PATH="/home/node/.yarn/bin:${PATH}"
 
 CMD yarn
 
