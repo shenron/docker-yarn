@@ -15,9 +15,11 @@ RUN apk update \
   && apk add tzdata \
   && cp /usr/share/zoneinfo/America/New_York /etc/localtime
 
-USER node:node
-
 COPY --from=build /root/.yarn /home/node/.yarn
+
+RUN chown -R node:node /home/node/.yarn
+
+USER node:node
 
 ENV PATH="/home/node/.yarn/bin:${PATH}"
 
