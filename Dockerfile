@@ -19,6 +19,9 @@ COPY --from=build /root/.yarn /home/node/.yarn
 
 RUN chown -R node:node /home/node/.yarn
 
+RUN mkdir -p /home/node/app
+RUN chown -R node:node /home/node/app
+
 USER node:node
 
 ENV PATH="/home/node/.yarn/bin:${PATH}"
