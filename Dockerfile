@@ -12,7 +12,9 @@ RUN apk update \
 FROM node:8-alpine
 
 RUN apk update \
-  && apk add tzdata \
+  && apk add \
+    tzdata \
+    git \
   && cp /usr/share/zoneinfo/America/New_York /etc/localtime
 
 COPY --from=build /root/.yarn /home/node/.yarn
