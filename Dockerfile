@@ -1,6 +1,6 @@
 FROM node:8-alpine as build
 
-ENV YARN_VERSION=1.7.0
+ENV YARN_VERSION=1.9.2
 
 RUN apk update \
   && apk add tzdata curl bash binutils tar \
