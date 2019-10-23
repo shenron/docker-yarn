@@ -1,6 +1,6 @@
-FROM node:10-alpine as build
+FROM node:12-alpine as build
 
-ENV YARN_VERSION=1.16.0
+ENV YARN_VERSION=1.19.1
 
 RUN apk update \
   && apk add tzdata curl bash binutils tar \
@@ -9,7 +9,7 @@ RUN apk update \
   && curl https://yarnpkg.com/install.sh --output install.sh \
   && bash ./install.sh --version ${YARN_VERSION}
 
-FROM node:10-alpine
+FROM node:12-alpine
 
 RUN apk update \
   && apk add \
@@ -19,10 +19,10 @@ RUN apk update \
 
 # flow-bin is broken by default with alpine
 # https://github.com/sgerrand/alpine-pkg-glibc
-RUN apk --no-cache add ca-certificates wget &&\
-wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub &&\
-wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-2.28-r0.apk &&\
-apk add glibc-2.28-r0.apk
+RUN apk --no-cache add ca-certificates wget && \
+  wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+  wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.30-r0/glibc-2.30-r0.apk && \
+  apk add glibc-2.30-r0.apk
 
 COPY --from=build /root/.yarn /home/node/.yarn
 
